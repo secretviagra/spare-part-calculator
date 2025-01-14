@@ -11,11 +11,14 @@
         <h1>Spare Part Calculator</h1>
         <form id="calculatorForm">
             <label for="vendor">Choose Vendor:</label>
-            <select id="vendor" name="vendor" required>
+            <select id="vendor" name="vendor" onchange="updateVendorMessage()" required>
                 <option value="">-- Select Vendor --</option>
-                <option value="1.25" data-shipping="125">KW Suspensions</option>
-                <option value="1.30" data-shipping="375">Milltek</option>
+                <option value="1.25" data-shipping="125">KW Suspensions (25% markup)</option>
+                <option value="1.30" data-shipping="375">Milltek (30% markup)</option>
             </select>
+
+            <!-- Vendor message output -->
+            <p id="vendorMessage" class="vendor-message"></p>
 
             <label for="costPrice">Cost Price (€):</label>
             <input type="number" id="costPrice" name="costPrice" step="0.01" required>
@@ -23,6 +26,7 @@
             <button type="button" onclick="calculatePrice()">Calculate</button>
         </form>
 
+        <!-- Results -->
         <div id="result" class="result"></div>
         <div id="shipping" class="shipping"></div>
     </div>
