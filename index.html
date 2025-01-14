@@ -28,7 +28,7 @@
             <input type="number" id="costPrice" name="costPrice" step="0.01" required>
 
             <button type="button" onclick="calculatePrice()">Calculate</button>
-        </form>
+        <form id="calculatorForm" onsubmit="handleFormSubmit(event)">
 
         <!-- Results -->
         <div id="result" class="result"></div>
