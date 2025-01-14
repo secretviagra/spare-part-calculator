@@ -14,23 +14,28 @@ function updateVendorMessage() {
 
 function calculatePrice() {
     const vendorSelect = document.getElementById('vendor');
-    const vendorMarkup = vendorSelect.value; // Get markup percentage
-    const shippingCost = vendorSelect.options[vendorSelect.selectedIndex].getAttribute('data-shipping'); // Get shipping cost
+    const vendorMarkup = vendorSelect.value; // Get markup percentage as string
+    const selectedOption = vendorSelect.options[vendorSelect.selectedIndex];
+    const shippingCost = selectedOption.getAttribute('data-shipping'); // Get shipping cost as string
     const costPrice = document.getElementById('costPrice').value; // Get cost price in Euros
 
+    // Validate inputs
     if (!vendorMarkup || !costPrice) {
         alert('Please select a vendor and enter a cost price.');
         return;
     }
 
+    // Parse values for calculations
+    const markup = parseFloat(vendorMarkup); // Convert markup to a float
+    const shippingCostInDKK = parseFloat(shippingCost); // Convert shipping cost to a float
+    const costPriceInEuros = parseFloat(costPrice); // Convert cost price to a float
+
     const exchangeRate = 7.5; // Fixed Euro to Danish Crown exchange rate
     const vatRate = 1.25; // 25% VAT
 
-    const markup = parseFloat(vendorMarkup); // Vendor-specific markup
-    const priceInDKKExVat = parseFloat(costPrice) * exchangeRate * markup; // Convert to DKK and apply markup
+    // Perform calculations
+    const priceInDKKExVat = costPriceInEuros * exchangeRate * markup; // Convert to DKK and apply markup
     const priceInDKKWithVat = priceInDKKExVat * vatRate; // Add VAT
-    const shippingCostInDKK = parseFloat(shippingCost);
-
     const totalWithShipping = priceInDKKWithVat + shippingCostInDKK;
 
     // Format numbers to Danish format
@@ -45,4 +50,6 @@ function calculatePrice() {
     const formattedTotal = formatter.format(totalWithShipping);
 
     // Display results
-    document.getElementById('result').innerText = `Final Price (incl. VAT): ${formatt
+    document.getElementById('result').innerText = `Final Price (incl. VAT): ${formattedPriceWithVat}`;
+    document.getElementById('shipping').innerText = `Shipping Cost: ${formattedShippingCost}. Total Price (incl. shipping): ${formattedTotal}`;
+}
