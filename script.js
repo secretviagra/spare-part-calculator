@@ -34,3 +34,16 @@ function calculatePrice() {
     document.getElementById('result').innerText = `Final Price (incl. VAT): ${formattedPriceWithVat}`;
     document.getElementById('shipping').innerText = `Shipping Cost: ${formattedShippingCost}. Total Price (incl. shipping): ${formattedTotal}`;
 }
+function updateVendorMessage() {
+    const vendorSelect = document.getElementById('vendor');
+    const vendorMessage = document.getElementById('vendorMessage');
+    const selectedVendor = vendorSelect.value;
+
+    if (selectedVendor === "1.25") {
+        vendorMessage.innerText = "Input your purchase price from https://b2b.kwsuspension.net/";
+    } else if (selectedVendor === "1.30") {
+        vendorMessage.innerText = "Input cost price in Euros from http://www.press.millteksport.org/";
+    } else {
+        vendorMessage.innerText = ""; // Clear message if no vendor is selected
+    }
+}
