@@ -6,20 +6,22 @@ function updateVendorMessage() {
 
     if (selectedOption.value) {
         const selectedVendor = selectedOption.getAttribute('data-vendor'); // Get data-vendor attribute
+        console.log("Selected Vendor:", selectedVendor); // Debugging log
+
         if (selectedVendor === "KW") {
             vendorMessage.innerText = "Input your purchase price from https://b2b.kwsuspension.net/";
-            vendorImage.src = "image/kw.jpg"; // Path to KW image
-            vendorImage.alt = "KW Suspensions Logo";
+            vendorImage.src = "image/kw.jpg"; // Correct path for KW image
+            vendorImage.alt = "KW Suspensions Help Image";
             vendorImage.style.display = "block";
         } else if (selectedVendor === "Milltek") {
             vendorMessage.innerText = "Input cost price in Euros from http://www.press.millteksport.org/";
-            vendorImage.src = "image/milltek.jpg"; // Path to Milltek image
-            vendorImage.alt = "Milltek Logo";
+            vendorImage.src = "image/Milltek.jpg"; // Correct path for Milltek image
+            vendorImage.alt = "Milltek Help Image";
             vendorImage.style.display = "block";
         } else if (selectedVendor === "Supersprint") {
             vendorMessage.innerText = "Input price in Euros ex. VAT from https://www.supersprint.com/";
-            vendorImage.src = "image/supersprint.jpg"; // Path to Supersprint image
-            vendorImage.alt = "Supersprint Logo";
+            vendorImage.src = "image/supersprint.jpg"; // Correct path for Supersprint image
+            vendorImage.alt = "Supersprint Help Image";
             vendorImage.style.display = "block";
         }
     } else {
