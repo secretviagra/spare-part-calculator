@@ -57,8 +57,8 @@ button:hover {
 }
 
 .vendor-image {
-    max-width: 300px; /* Restrict the width */
-    max-height: 200px; /* Restrict the height */
+    max-width: 600px; /* Restrict the width */
+    max-height: 400px; /* Restrict the height */
     width: auto; /* Maintain aspect ratio */
     height: auto; /* Maintain aspect ratio */
     display: none; /* Initially hidden */
