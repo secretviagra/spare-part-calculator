@@ -10,6 +10,8 @@ function updateVendorMessage() {
             vendorMessage.innerText = "Input your purchase price from https://b2b.kwsuspension.net/";
         } else if (selectedVendor === "Milltek") {
             vendorMessage.innerText = "Input cost price in Euros from http://www.press.millteksport.org/";
+        } else if (selectedVendor === "Supersprint") {
+            vendorMessage.innerText = "Input price in Euros ex. VAT from https://www.supersprint.com/";
         }
     } else {
         vendorMessage.innerText = ""; // Clear message if no vendor is selected
