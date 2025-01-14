@@ -9,12 +9,13 @@ body {
 }
 
 .calculator {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 300px;
+    width: 80%; /* Adjust width as needed */
+    max-width: 1200px; /* Set a maximum width */
+    margin: 0 auto; /* Center the widget */
+    padding: 20px; /* Add some spacing inside */
+    background-color: #f9f9f9; /* Optional: Set a light background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+    border-radius: 8px; /* Optional: Round the corners */
 }
 
 h1 {
