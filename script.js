@@ -15,7 +15,7 @@ function updateVendorMessage() {
             vendorImage.style.display = "block";
         } else if (selectedVendor === "Milltek") {
             vendorMessage.innerText = "Input cost price in Euros from http://www.press.millteksport.org/";
-            vendorImage.src = "image/Milltek.jpg"; // Correct path for Milltek image
+            vendorImage.src = "image/milltek.jpg"; // Correct path for Milltek image
             vendorImage.alt = "Milltek Help Image";
             vendorImage.style.display = "block";
         } else if (selectedVendor === "Supersprint") {
