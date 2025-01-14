@@ -1,12 +1,16 @@
 function updateVendorMessage() {
     const vendorSelect = document.getElementById('vendor');
     const vendorMessage = document.getElementById('vendorMessage');
-    const selectedVendor = vendorSelect.options[vendorSelect.selectedIndex].getAttribute('data-vendor'); // Get data-vendor attribute
-
-    if (selectedVendor === "KW") {
-        vendorMessage.innerText = "Input your purchase price from https://b2b.kwsuspension.net/";
-    } else if (selectedVendor === "Milltek") {
-        vendorMessage.innerText = "Input cost price in Euros from http://www.press.millteksport.org/";
+    const selectedOption = vendorSelect.options[vendorSelect.selectedIndex];
+    
+    // Check if a valid vendor is selected
+    if (selectedOption.value) {
+        const selectedVendor = selectedOption.getAttribute('data-vendor'); // Get data-vendor attribute
+        if (selectedVendor === "KW") {
+            vendorMessage.innerText = "Input your purchase price from https://b2b.kwsuspension.net/";
+        } else if (selectedVendor === "Milltek") {
+            vendorMessage.innerText = "Input cost price in Euros from http://www.press.millteksport.org/";
+        }
     } else {
         vendorMessage.innerText = ""; // Clear message if no vendor is selected
     }
@@ -14,9 +18,9 @@ function updateVendorMessage() {
 
 function calculatePrice() {
     const vendorSelect = document.getElementById('vendor');
-    const vendorMarkup = vendorSelect.value; // Get markup percentage as string
     const selectedOption = vendorSelect.options[vendorSelect.selectedIndex];
-    const shippingCost = selectedOption.getAttribute('data-shipping'); // Get shipping cost as string
+    const vendorMarkup = vendorSelect.value; // Get markup percentage
+    const shippingCost = selectedOption ? selectedOption.getAttribute('data-shipping') : null; // Get shipping cost
     const costPrice = document.getElementById('costPrice').value; // Get cost price in Euros
 
     // Validate inputs
