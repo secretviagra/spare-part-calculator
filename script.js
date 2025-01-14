@@ -15,13 +15,22 @@ function calculatePrice() {
     const markup = parseFloat(vendorMarkup); // Vendor-specific markup
     const priceInDKKExVat = parseFloat(costPrice) * exchangeRate * markup; // Convert to DKK and apply markup
     const priceInDKKWithVat = priceInDKKExVat * vatRate; // Add VAT
+    const shippingCostInDKK = parseFloat(shippingCost);
 
-    const roundedPrice = priceInDKKWithVat.toFixed(2); // Round to 2 decimal places
+    const totalWithShipping = priceInDKKWithVat + shippingCostInDKK;
 
-    // Calculate total cost including shipping
-    const totalWithShipping = (parseFloat(priceInDKKWithVat) + parseFloat(shippingCost)).toFixed(2);
+    // Format numbers to Danish format
+    const formatter = new Intl.NumberFormat('da-DK', {
+        style: 'currency',
+        currency: 'DKK',
+        minimumFractionDigits: 2,
+    });
+
+    const formattedPriceWithVat = formatter.format(priceInDKKWithVat);
+    const formattedShippingCost = formatter.format(shippingCostInDKK);
+    const formattedTotal = formatter.format(totalWithShipping);
 
     // Display results
-    document.getElementById('result').innerText = `Final Price: ${roundedPrice} DKK (incl. VAT)`;
-    document.getElementById('shipping').innerText = `Shipping Cost: ${shippingCost} DKK. Total Price (incl. shipping): ${totalWithShipping} DKK`;
+    document.getElementById('result').innerText = `Final Price (incl. VAT): ${formattedPriceWithVat}`;
+    document.getElementById('shipping').innerText = `Shipping Cost: ${formattedShippingCost}. Total Price (incl. shipping): ${formattedTotal}`;
 }
