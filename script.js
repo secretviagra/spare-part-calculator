@@ -4,7 +4,7 @@ function updateVendorMessage() {
     const selectedOption = vendorSelect.options[vendorSelect.selectedIndex];
     
     // Check if a valid vendor is selected
-    if (selectedOption.value) {
+   if (selectedOption.value) {
         const selectedVendor = selectedOption.getAttribute('data-vendor'); // Get data-vendor attribute
         if (selectedVendor === "KW") {
             vendorMessage.innerText = "Input your purchase price from https://b2b.kwsuspension.net/";
