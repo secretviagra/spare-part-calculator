@@ -9,8 +9,8 @@ body {
 }
 
 .calculator {
-    width: 80%; /* Adjust width as needed */
-    max-width: 1200px; /* Set a maximum width */
+    width: 60%; /* Adjust width as needed */
+    max-width: 1000px; /* Set a maximum width */
     margin: 0 auto; /* Center the widget */
     padding: 20px; /* Add some spacing inside */
     background-color: #f9f9f9; /* Optional: Set a light background */
