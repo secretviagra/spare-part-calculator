@@ -9,7 +9,7 @@
 <body>
     <div class="calculator">
         <h1>Spare Part Calculator</h1>
-        <form id="calculatorForm">
+        <form id="calculatorForm" onsubmit="handleFormSubmit(event)">
             <label for="vendor">Choose Vendor:</label>
             <select id="vendor" name="vendor" onchange="updateVendorMessage()" required>
                 <option value="">-- Select Vendor --</option>
@@ -22,13 +22,13 @@
             <p id="vendorMessage" class="vendor-message"></p>
             
             <!-- Vendor image output -->
-            <img id="vendorImage" class="vendor-image" src="" alt="Instructional Image" style="display: none; max-width: 100%; height: auto;">
+            <img id="vendorImage" class="vendor-image" src="" alt="" style="display: none; max-width: 100%; height: auto;">
 
             <label for="costPrice">Cost Price (€):</label>
             <input type="number" id="costPrice" name="costPrice" step="0.01" required>
 
             <button type="button" onclick="calculatePrice()">Calculate</button>
-        <form id="calculatorForm" onsubmit="handleFormSubmit(event)">
+        </form>
 
         <!-- Results -->
         <div id="result" class="result"></div>
