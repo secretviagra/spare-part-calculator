@@ -18,11 +18,6 @@ function updateVendorMessage() {
             vendorImage.src = "image/milltek.jpg"; // Path for Milltek image
             vendorImage.alt = "Milltek Help Image";
             vendorImage.style.display = "block";
-        } else if (selectedVendor === "Supersprint") {
-            vendorMessage.innerText = "Input price in Euros ex. VAT from https://www.supersprint.com/";
-            vendorImage.src = "image/supersprint.jpg"; // Path for Supersprint image
-            vendorImage.alt = "Supersprint Help Image";
-            vendorImage.style.display = "block";
         }
     } else {
         vendorMessage.innerText = ""; // Clear message if no vendor is selected
