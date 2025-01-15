@@ -9,12 +9,13 @@ function updateVendorMessage() {
         console.log("Selected Vendor:", selectedVendor); // Debugging log
 
         if (selectedVendor === "KW") {
-            vendorMessage.innerText = "Input your purchase price from https://b2b.kwsuspension.net/";
+            vendorMessage.innerText = "Input purchase price from https://b2b.kwsuspension.net/";
             vendorImage.src = "image/kw.jpg"; // Path for KW image
             vendorImage.alt = "KW Suspensions Help Image";
             vendorImage.style.display = "block";
         } else if (selectedVendor === "Milltek") {
-            vendorMessage.innerText = "Input cost price in Euros from http://www.press.millteksport.org/";
+            vendorMessage.innerText = "Input RRP price in Pounds from http://www.press.millteksport.org/";
+            vendorMessage.innerText += "\nTip Assembly is half shipping cost";
             vendorImage.src = "image/milltek.jpg"; // Path for Milltek image
             vendorImage.alt = "Milltek Help Image";
             vendorImage.style.display = "block";
@@ -31,7 +32,7 @@ function calculatePrice() {
     const selectedOption = vendorSelect.options[vendorSelect.selectedIndex];
     const vendorMarkup = vendorSelect.value; // Get markup percentage
     const shippingCost = selectedOption ? selectedOption.getAttribute('data-shipping') : null; // Get shipping cost
-    const costPrice = document.getElementById('costPrice').value; // Get cost price in Euros
+    const costPrice = document.getElementById('costPrice').value; // Get cost price
 
     // Validate inputs
     if (!vendorMarkup || !costPrice) {
@@ -41,16 +42,38 @@ function calculatePrice() {
 
     // Parse values for calculations
     const markup = parseFloat(vendorMarkup); // Convert markup to a float
-    const shippingCostInDKK = parseFloat(shippingCost); // Convert shipping cost to a float
-    const costPriceInEuros = parseFloat(costPrice); // Convert cost price to a float
+    const costPriceInOriginalCurrency = parseFloat(costPrice); // Convert cost price to a float
 
-    const exchangeRate = 7.5; // Fixed Euro to Danish Crown exchange rate
-    const vatRate = 1.25; // 25% VAT
+    let priceInDKKWithVat;
+    let totalWithShipping;
 
-    // Perform calculations
-    const priceInDKKExVat = costPriceInEuros * exchangeRate * markup; // Convert to DKK and apply markup
-    const priceInDKKWithVat = priceInDKKExVat * vatRate; // Add VAT
-    const totalWithShipping = priceInDKKWithVat + shippingCostInDKK;
+    // Determine calculation logic based on the selected vendor
+    const selectedVendor = selectedOption.getAttribute('data-vendor');
+    if (selectedVendor === "Milltek") {
+        // Milltek-specific calculation
+        priceInDKKWithVat = costPriceInOriginalCurrency * 11.15; // Direct calculation including VAT
+        totalWithShipping = priceInDKKWithVat + 800; // Add fixed shipping cost
+    } else if (selectedVendor === "KW") {
+        // KW-specific calculation
+        const exchangeRate = 7.5; // Fixed Euro to Danish Crown exchange rate
+        const vatRate = 1.25; // 25% VAT
+        const shippingCostInDKK = parseFloat(shippingCost); // Convert shipping cost to a float
+
+        // Determine the multiplier based on the price
+        const kwMultiplier = costPriceInOriginalCurrency > 200 ? 1.7 : 2;
+
+        priceInDKKWithVat = costPriceInOriginalCurrency * exchangeRate * vatRate * kwMultiplier; // KW-specific formula
+        totalWithShipping = priceInDKKWithVat + shippingCostInDKK; // Add shipping cost
+    } else {
+        // General calculation for other vendors
+        const exchangeRate = 7.5; // Fixed Euro to Danish Crown exchange rate
+        const vatRate = 1.25; // 25% VAT
+        const shippingCostInDKK = parseFloat(shippingCost); // Convert shipping cost to a float
+
+        const priceInDKKExVat = costPriceInOriginalCurrency * exchangeRate * markup; // Convert to DKK and apply markup
+        priceInDKKWithVat = priceInDKKExVat * vatRate; // Add VAT
+        totalWithShipping = priceInDKKWithVat + shippingCostInDKK; // Add shipping cost
+    }
 
     // Format numbers to Danish format
     const formatter = new Intl.NumberFormat('da-DK', {
@@ -60,8 +83,8 @@ function calculatePrice() {
     });
 
     const formattedPriceWithVat = formatter.format(priceInDKKWithVat);
-    const formattedShippingCost = formatter.format(shippingCostInDKK);
     const formattedTotal = formatter.format(totalWithShipping);
+    const formattedShippingCost = formatter.format(parseFloat(shippingCost));
 
     // Display results
     document.getElementById('result').innerText = `Final Price (incl. VAT): ${formattedPriceWithVat}`;

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spare Part Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <h1>Spare Part Calculator</h1>
+        <form id="calculatorForm" onsubmit="handleFormSubmit(event)">
+            <label for="vendor">Choose Vendor:</label>
+            <select id="vendor" name="vendor" onchange="updateVendorMessage()" required>
+                <option value="">-- Select Vendor --</option>
+                <option value="1.50" data-vendor="KW" data-shipping="125">KW Suspensions</option>
+                <option value="1.50" data-vendor="Milltek" data-shipping="800">Milltek</option>
+            </select>
+
+            <!-- Vendor message output -->
+            <p id="vendorMessage" class="vendor-message"></p>
+            
+            <!-- Vendor image output -->
+            <img id="vendorImage" class="vendor-image" src="" alt="" style="display: none; max-width: 100%; height: auto;">
+
+            <label for="costPrice">Input Vendor Price:</label>
+            <input type="number" id="costPrice" name="costPrice" step="0.01" required>
+
+            <button type="button" onclick="calculatePrice()">Calculate</button>
+        </form>
+
+        <!-- Results -->
+        <div id="result" class="result"></div>
+        <div id="shipping" class="shipping"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
